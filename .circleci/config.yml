@@ -31,7 +31,7 @@ jobs:
   llvm:
     executor: alpine
     steps:
-      - run: apk add ca-certificates g++
+      - run: apk add ca-certificates 
       - checkout
       - attach_workspace:
           at: ~/workspace
