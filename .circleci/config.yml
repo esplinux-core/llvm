@@ -46,6 +46,6 @@ workflows:
   build:
     jobs:
       - prepare
-      - mksh:
+      - llvm:
           requires:
-            - llvm
+            - prepare
