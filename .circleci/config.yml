@@ -4,7 +4,7 @@ executors:
   alpine:
     docker:
       - image: alpine:3.9
-    working_directory: /
+    working_directory: /project
     environment:
       VERSION: bootstrap
       ESPBUILD_VERSION: 0.01
@@ -16,7 +16,7 @@ jobs:
     steps:
       - run: apk add ca-certificates curl go git build-base
       - run: mkdir -p ~/workspace/tools/bin
-      - run: curl -LO https://github.com/esplinux/espbuild/releases/download/$ESPBUILD_VERSION/espbuild.tar.gz
+      - run: cd /; curl -LO https://github.com/esplinux/espbuild/releases/download/$ESPBUILD_VERSION/espbuild.tar.gz
       - run: cd ~/workspace/tools; tar xf /espbuild.tar.gz
       - run: go mod init .
       - run: go get github.com/tcnksm/ghr@$GHR_VERSION
@@ -31,8 +31,8 @@ jobs:
   llvm:
     executor: alpine
     steps:
-      - checkout
       - run: apk add ca-certificates g++
+      - checkout
       - attach_workspace:
           at: ~/workspace
       - run:
