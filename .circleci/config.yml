@@ -14,7 +14,7 @@ jobs:
           command: |
             esp add ghr espbuild
             echo gnu >> /etc/esp-repos
-            espbuild llvm.conf
+            espbuild ${CIRCLE_PROJECT_REPONAME}.conf
             ghr -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ~/package
 
 workflows:
