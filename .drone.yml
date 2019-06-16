@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: build
-  image: esplinux:bootstrap
+  image: esplinux/bootstrap
   environment:
     VERSION: "bootstrap"
     ESPBUILD_VERSION: "0.01"
