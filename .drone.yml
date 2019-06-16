@@ -12,8 +12,8 @@ steps:
       from_secret: github_token
   commands:
   - cd /
-  - esp add ghr espbuild
   - echo gnu >> /etc/esp-repos
+  - esp add ghr espbuild git
   - espbuild $CI_WORKSPACE/$DRONE_REPO_NAME.conf
   - ghr -u $DRONE_REPO_OWNER -r $DRONE_REPO_NAME -c $DRONE_COMMIT_SHA -delete $VERSION /package
 
