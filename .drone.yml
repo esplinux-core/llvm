@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: build
-  image: alpine:3.9
+  image: esplinux:bootstrap
   environment:
     VERSION: "bootstrap"
     ESPBUILD_VERSION: "0.01"
@@ -12,13 +12,9 @@ steps:
       from_secret: github_token
   commands:
   - cd /
-  - apk add ca-certificates go git build-base
-  - wget https://github.com/esplinux/espbuild/releases/download/$ESPBUILD_VERSION/espbuild-static.tar.gz
-  - tar xf espbuild-static.tar.gz
+  - esp add ghr espbuild
   - espbuild $CI_WORKSPACE/$DRONE_REPO_NAME.conf
-  - go mod init .
-  - go get github.com/tcnksm/ghr@v$GHR_VERSION
-  - ~/go/bin/ghr -u $DRONE_REPO_OWNER -r $DRONE_REPO_NAME -c $DRONE_COMMIT_SHA -delete $VERSION /package
+  - ghr -u $DRONE_REPO_OWNER -r $DRONE_REPO_NAME -c $DRONE_COMMIT_SHA -delete $VERSION /package
 
 trigger:
   event:
