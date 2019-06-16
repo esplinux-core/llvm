@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 
 jobs:
   build:
@@ -16,9 +16,3 @@ jobs:
             echo gnu >> /etc/esp-repos
             espbuild ${CIRCLE_PROJECT_REPONAME}.conf
             ghr -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ~/package
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
